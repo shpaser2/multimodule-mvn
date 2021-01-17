@@ -1,21 +1,24 @@
 package by.academy.model;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Employee {
     private String name;
-    private BigDecimal[] monthsSalaries = new BigDecimal[12];
+    public static final int SALARIES_MOUNTHS_PERIOD = 12;
+    private List<BigDecimal> monthsSalaries = new ArrayList<>();
 
     public Employee(String name) {
         this.name = name;
-        Arrays.fill(this.monthsSalaries, BigDecimal.ZERO);
+        for (BigDecimal monthsSalary : monthsSalaries) {
+            monthsSalary = new BigDecimal('0');
+        }
     }
 
-    public Employee(String name, BigDecimal[] monthsSalaries) {
+    public Employee(String name, List<BigDecimal> monthsSalaries) {
         this.name = name;
-        this.monthsSalaries = Arrays.copyOf(monthsSalaries,
-                monthsSalaries.length);
+        this.monthsSalaries = List.copyOf(monthsSalaries);
     }
 
     public String getName() {
@@ -26,19 +29,19 @@ public class Employee {
         this.name = name;
     }
 
-    public BigDecimal[] getMonthsSalaries() {
+    public List<BigDecimal> getMonthsSalaries() {
         return monthsSalaries;
     }
 
-    public void setMonthsSalaries(BigDecimal[] monthsSalaries) {
-        this.monthsSalaries = monthsSalaries;
+    public void setMonthsSalaries(List<BigDecimal> monthsSalaries) {
+        this.monthsSalaries = List.copyOf(monthsSalaries);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
-                ", monthsSalaries=" + Arrays.toString(monthsSalaries) +
+                ", monthsSalaries=" + monthsSalaries +
                 '}';
     }
 }

@@ -28,23 +28,27 @@ public class Loader {
     }
 
     private static List<Employee> fillInEmployeeSalaries(int employeeAmount) {
-        final int MONTH_AMOUNT = 12;
-        BigDecimal[] salaries = new BigDecimal[MONTH_AMOUNT];
-
         ArrayList<Employee> employees = new ArrayList<>();
+        List<BigDecimal> salaries = new ArrayList<>();
         while (employeeAmount > 0) {
-            System.out.println("\n\tВведите имя работника: ");
-            String name = "";
-            while (name.equals("")) {
-                name = Loader.input.nextLine();
-            }
-            for (int i = 0; i < salaries.length; i++) {
+            String name = Loader.getName();
+
+            for (int i = 0; i < Employee.SALARIES_MOUNTHS_PERIOD; i++) {
                 System.out.printf("введите зарплату за %d месяц \n", i + 1);
-                salaries[i] = Loader.input.nextBigDecimal();
+                salaries.add(Loader.input.nextBigDecimal());
             }
             employees.add(new Employee(name, salaries));
             employeeAmount--;
         }
         return employees;
+    }
+
+    private static String getName() {
+        System.out.println("\n\tВведите имя работника: ");
+        String name = "";
+        while ("".equals(name)) {
+            name = Loader.input.nextLine();
+        }
+        return name;
     }
 }
